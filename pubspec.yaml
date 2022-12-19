@@ -39,7 +39,6 @@ dependencies:
   get: ^4.6.5
   get_storage: ^2.0.3
   uuid: ^3.0.7
-  google_fonts: ^3.0.1
   intl: ^0.18.0
 
 dev_dependencies:

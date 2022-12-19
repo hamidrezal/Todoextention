@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:task_list/control/controller/task_controller.dart';
@@ -24,7 +23,7 @@ class HomeScreen extends StatelessWidget {
           _CustomTextFeild(width: width, taskcontroller: taskcontroller,uuid: uuid),
           /// Task List
           Container(
-            margin: EdgeInsets.only(top: 20),
+            margin: const EdgeInsets.only(top: 20),
             width: width,
             height: 300,
             child: Obx(()=>ListView.builder(
@@ -32,7 +31,7 @@ class HomeScreen extends StatelessWidget {
                 itemBuilder: (context,index){
                   return Padding(
                     padding: const EdgeInsets.only(left: 15,right: 15,top: 30),
-                    child: Container(
+                    child: SizedBox(
                       width: width,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,8 +54,8 @@ class HomeScreen extends StatelessWidget {
                               ),
                               /// task title
                               Text(taskcontroller.tasks[index].tasktitle.toString(),
-                                style: TextStyle(color: taskcontroller.tasks[index].status! ? Color(0xfff56369): Color(0xffc6c6c6),
-                                  decoration: taskcontroller.tasks[index].status!? TextDecoration.lineThrough :TextDecoration.none),)
+                                style: TextStyle(color: taskcontroller.tasks[index].status! ? const Color(0xfff56369): const Color(0xffc6c6c6),
+                                    decoration: taskcontroller.tasks[index].status!? TextDecoration.lineThrough :TextDecoration.none),)
                             ],
                           ),
                           GestureDetector(
@@ -91,19 +90,19 @@ class _CustomTextFeild extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(padding: EdgeInsets.only(left: 15,right: 15,top: 20),
+    return Padding(padding: const EdgeInsets.only(left: 15,right: 15,top: 20),
     child:Container(
       width: width,
       height: 50,
       decoration: BoxDecoration(
-        color: Color(0xff343a3f),
+        color: const Color(0xff343a3f),
         borderRadius: BorderRadius.circular(12)
       ),
       child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 15),
+        padding:  const EdgeInsets.symmetric(horizontal: 15),
         child: TextField(
           controller: taskcontroller.tasktitle,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
           cursorColor: Colors.white,
           onSubmitted: (value){
             taskcontroller.tasks.add(TaskModel(
@@ -116,7 +115,7 @@ class _CustomTextFeild extends StatelessWidget {
           decoration: InputDecoration(
             hintText: "Enter Your Task",
             hintStyle: TextStyle(color: Colors.grey[700]),
-            border: UnderlineInputBorder(borderSide: BorderSide.none),
+            border: const UnderlineInputBorder(borderSide: BorderSide.none),
           )
         ),
       ),
@@ -142,10 +141,10 @@ class _AddTasksection extends StatelessWidget {
       alignment: AlignmentDirectional.center,
       children: [
         ///Divider
-        Container(width: width,height: 2, color: Color(0xff2d333a),),
+        Container(width: width,height: 2, color: const Color(0xff2d333a),),
         /// AddButon
         Container(
-        alignment: Alignment(0.84,0),
+        alignment: const Alignment(0.84,0),
         child:GestureDetector(
           onTap: (){
             taskcontroller.tasks.add(TaskModel(
@@ -158,8 +157,8 @@ class _AddTasksection extends StatelessWidget {
           child: Container(
             width: 40,
             height: 40,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),color: Color(0xfff56369)),
-            child: Center(child: Icon(Icons.add,color: Colors.white,),),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),color: const Color(0xfff56369)),
+            child: const Center(child: Icon(Icons.add,color: Colors.white,),),
           ),
         ),),
 

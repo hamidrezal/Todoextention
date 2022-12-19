@@ -6,11 +6,11 @@ import 'package:get_storage/get_storage.dart';
 
 void main() async{
   await GetStorage.init();
-  runApp(const MyApp());
+  runApp(const TodoExtention());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class TodoExtention extends StatelessWidget {
+  const TodoExtention({super.key});
 
   @override
   Widget build(BuildContext context) {
