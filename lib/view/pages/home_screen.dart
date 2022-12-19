@@ -21,12 +21,12 @@ class HomeScreen extends StatelessWidget {
           _Header(width: width),/// Herder Section :  Time
          _AddTasksection(width: width, taskcontroller: taskcontroller, uuid: uuid),/// Divider : Add Buttton
           /// text field
-          _CustomTextFeild(width: width, taskcontroller: taskcontroller),
+          _CustomTextFeild(width: width, taskcontroller: taskcontroller,uuid: uuid),
           /// Task List
           Container(
             margin: EdgeInsets.only(top: 20),
             width: width,
-            height: 600,
+            height: 300,
             child: Obx(()=>ListView.builder(
                 itemCount: taskcontroller.tasks.length,
                 itemBuilder: (context,index){
@@ -42,24 +42,28 @@ class HomeScreen extends StatelessWidget {
                               Checkbox(
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                                 checkColor: Colors.white,
-                                activeColor: Color(0xfff56369),
+                                activeColor: const Color(0xfff56369),
                                 onChanged: (value) {
                                   taskcontroller.tasks[index].status =! taskcontroller.tasks[index].status!;
                                   Get.find<TaskModelController>().tasks[index] = taskcontroller.tasks[index];
                                 },
                                 value:taskcontroller.tasks[index].status,),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 3,right: 5),
+                              // #
+                              const Padding(
+                                padding: EdgeInsets.only(left: 3,right: 5),
                                 child: Text("#",style: TextStyle(color: Color(0xffc6c6c6)),),
                               ),
-                              Text(taskcontroller.tasks[index].tasktitle.toString(),style: TextStyle(color: Color(0xffc6c6c6)),)
+                              /// task title
+                              Text(taskcontroller.tasks[index].tasktitle.toString(),
+                                style: TextStyle(color: taskcontroller.tasks[index].status! ? Color(0xfff56369): Color(0xffc6c6c6),
+                                  decoration: taskcontroller.tasks[index].status!? TextDecoration.lineThrough :TextDecoration.none),)
                             ],
                           ),
                           GestureDetector(
                             onTap: (){
                               taskcontroller.tasks.removeAt(index);
                             },
-                            child: Icon(Icons.delete,color: Colors.grey[500],),
+                            child: Icon(Icons.delete,color: Colors.grey[500],size: 20,),
                           )
                         ],
                       ),
@@ -79,8 +83,9 @@ class _CustomTextFeild extends StatelessWidget {
     Key? key,
     required this.width,
     required this.taskcontroller,
+    required this.uuid,
   }) : super(key: key);
-
+  final Uuid uuid;
   final double width;
   final TaskModelController taskcontroller;
 
@@ -100,6 +105,14 @@ class _CustomTextFeild extends StatelessWidget {
           controller: taskcontroller.tasktitle,
           style: TextStyle(color: Colors.white),
           cursorColor: Colors.white,
+          onSubmitted: (value){
+            taskcontroller.tasks.add(TaskModel(
+              tasktitle:taskcontroller.tasktitle!.text ,
+              status: false,
+              id: uuid.v4(),
+            ));
+            taskcontroller.tasktitle?.clear();
+          },
           decoration: InputDecoration(
             hintText: "Enter Your Task",
             hintStyle: TextStyle(color: Colors.grey[700]),
@@ -129,7 +142,7 @@ class _AddTasksection extends StatelessWidget {
       alignment: AlignmentDirectional.center,
       children: [
         ///Divider
-        Container(width: width,height: 3, color: Color(0xff2d333a),),
+        Container(width: width,height: 2, color: Color(0xff2d333a),),
         /// AddButon
         Container(
         alignment: Alignment(0.84,0),
@@ -143,8 +156,8 @@ class _AddTasksection extends StatelessWidget {
             taskcontroller.tasktitle?.clear();
           },
           child: Container(
-            width: 50,
-            height: 50,
+            width: 40,
+            height: 40,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),color: Color(0xfff56369)),
             child: Center(child: Icon(Icons.add,color: Colors.white,),),
           ),
@@ -180,7 +193,7 @@ class _Header extends StatelessWidget {
              ///Time
              Text(DateFormat.yMMMMd().format(DateTime.now()),
                style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w800),),
-             Obx(() => Text("${Get.find<TaskModelController>().tasks.length} Tasks",style: const TextStyle(fontSize: 12,color: Colors.white),))
+             Obx(() => Text("${Get.find<TaskModelController>().tasks.length} AllTasks",style: const TextStyle(fontSize: 12,color: Colors.white),))
 
            ],),
             /// Today
