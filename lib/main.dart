@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:task_list/control/binding/TaskListBinding.dart';
 import 'package:task_list/view/pages/home_screen.dart';
-void main() {
+import 'package:get_storage/get_storage.dart';
+
+void main() async{
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -10,9 +14,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
-home: HomeScreen(),
+    return GetMaterialApp(
+     initialBinding: TaskListbinding(),
+      debugShowCheckedModeBanner: false,
+      home: HomeScreen(),
     );
   }
 }
-

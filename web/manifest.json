@@ -1,11 +1,11 @@
 {
-    "name": "task_list",
-    "short_name": "task_list",
+    "name": "google_extention",
+    "short_name": "google_extention",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Task management.",
+    "description": "A new Flutter project.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
