@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:task_list/control/controller/task_controller.dart';
 import 'package:task_list/model/task_model.dart';
 import 'package:uuid/uuid.dart';
+import 'package:task_list/view/widgets/textfield_widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -18,10 +19,8 @@ class HomeScreen extends StatelessWidget {
       body: ListView(
         children: [
           _Header(width: width),/// Herder Section :  Time
-         _AddTasksection(width: width, taskcontroller: taskcontroller, uuid: uuid),/// Divider : Add Buttton
-          /// text field
-          _CustomTextFeild(width: width, taskcontroller: taskcontroller,uuid: uuid),
-          /// Task List
+          Container(margin: const EdgeInsets.only(top: 10),width: width,height: 2, color: const Color(0xff2d333a),),   ///Divider
+          /// Task ListView
           Container(
             margin: const EdgeInsets.only(top: 20),
             width: width,
@@ -36,8 +35,7 @@ class HomeScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
+                          Row(children: [
                               Checkbox(
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                                 checkColor: Colors.white,
@@ -59,9 +57,7 @@ class HomeScreen extends StatelessWidget {
                             ],
                           ),
                           GestureDetector(
-                            onTap: (){
-                              taskcontroller.tasks.removeAt(index);
-                            },
+                            onTap: (){taskcontroller.tasks.removeAt(index);},
                             child: Icon(Icons.delete,color: Colors.grey[500],size: 20,),
                           )
                         ],
@@ -69,59 +65,19 @@ class HomeScreen extends StatelessWidget {
                     ),
                   );
                 }),)
-          )
+          ),
+          Padding(padding: const EdgeInsets.only(top: 40),
+            child: _AddTasksection(width: width, taskcontroller: taskcontroller, uuid: uuid),),/// Add Buttton
+          /// text field
+          CustomTextFeild(width: width, taskcontroller: taskcontroller,uuid: uuid),
         ],
       ),
     );
   }
 }
 
-// text field
-class _CustomTextFeild extends StatelessWidget {
-  const _CustomTextFeild({
-    Key? key,
-    required this.width,
-    required this.taskcontroller,
-    required this.uuid,
-  }) : super(key: key);
-  final Uuid uuid;
-  final double width;
-  final TaskModelController taskcontroller;
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(padding: const EdgeInsets.only(left: 15,right: 15,top: 20),
-    child:Container(
-      width: width,
-      height: 50,
-      decoration: BoxDecoration(
-        color: const Color(0xff343a3f),
-        borderRadius: BorderRadius.circular(12)
-      ),
-      child: Padding(
-        padding:  const EdgeInsets.symmetric(horizontal: 15),
-        child: TextField(
-          controller: taskcontroller.tasktitle,
-          style: const TextStyle(color: Colors.white),
-          cursorColor: Colors.white,
-          onSubmitted: (value){
-            taskcontroller.tasks.add(TaskModel(
-              tasktitle:taskcontroller.tasktitle!.text ,
-              status: false,
-              id: uuid.v4(),
-            ));
-            taskcontroller.tasktitle?.clear();
-          },
-          decoration: InputDecoration(
-            hintText: "Enter Your Task",
-            hintStyle: TextStyle(color: Colors.grey[700]),
-            border: const UnderlineInputBorder(borderSide: BorderSide.none),
-          )
-        ),
-      ),
-    ),);
-  }
-}
+
 // Divider : Add Buttton
 class _AddTasksection extends StatelessWidget {
   const _AddTasksection({
@@ -140,25 +96,18 @@ class _AddTasksection extends StatelessWidget {
     return Stack(
       alignment: AlignmentDirectional.center,
       children: [
-        ///Divider
-        Container(width: width,height: 2, color: const Color(0xff2d333a),),
         /// AddButon
         Container(
         alignment: const Alignment(0.84,0),
         child:GestureDetector(
           onTap: (){
-            taskcontroller.tasks.add(TaskModel(
-              tasktitle:taskcontroller.tasktitle!.text ,
-              status: false,
-              id: uuid.v4(),
-            ));
+            taskcontroller.tasks.add(
+                TaskModel(tasktitle:taskcontroller.tasktitle!.text ,status: false, id: uuid.v4(),));
             taskcontroller.tasktitle?.clear();
           },
-          child: Container(
-            width: 40,
-            height: 40,
+          child: Container(width: 40, height: 40,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),color: const Color(0xfff56369)),
-            child: const Center(child: Icon(Icons.add,color: Colors.white,),),
+            child: const Center(child: Icon(Icons.add_rounded,color: Colors.white,size: 18,),),
           ),
         ),),
 
@@ -167,6 +116,7 @@ class _AddTasksection extends StatelessWidget {
     );
   }
 }
+
 // Herder Section :  Time
 class _Header extends StatelessWidget {
   const _Header({

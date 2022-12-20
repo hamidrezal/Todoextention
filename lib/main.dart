@@ -17,7 +17,7 @@ class TodoExtention extends StatelessWidget {
     return GetMaterialApp(
      initialBinding: TaskListbinding(),
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: const HomeScreen(),
     );
   }
 }
