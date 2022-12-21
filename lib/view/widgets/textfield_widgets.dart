@@ -26,10 +26,11 @@ class CustomTextFeild extends StatelessWidget {
             borderRadius: BorderRadius.circular(12)
         ),
         child: Padding(
-          padding:  const EdgeInsets.symmetric(horizontal: 15),
+          padding:  const EdgeInsets.only(left: 15,right: 15,bottom: 5,),
           child: TextField(
+            maxLength: 40,
               controller: taskcontroller.tasktitle,
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white,fontSize: 13),
               cursorColor: Colors.white,
               onSubmitted: (value){
                 taskcontroller.tasks.add(TaskModel(
@@ -40,8 +41,9 @@ class CustomTextFeild extends StatelessWidget {
                 taskcontroller.tasktitle?.clear();
               },
               decoration: InputDecoration(
+                counterStyle: const TextStyle(color: Colors.grey,fontSize: 10),
                 hintText: "Enter Your Task",
-                hintStyle: TextStyle(color: Colors.grey[700],fontSize: 14),
+                hintStyle: TextStyle(color: Colors.grey[700],fontSize: 12),
                 border: const UnderlineInputBorder(borderSide: BorderSide.none),
               )
           ),
