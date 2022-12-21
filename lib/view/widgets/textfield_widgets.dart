@@ -22,7 +22,7 @@ class CustomTextFeild extends StatelessWidget {
         width: width,
         height: 45,
         decoration: BoxDecoration(
-            color: const Color(0xff343a3f),
+            color: const Color(0xff242d41),
             borderRadius: BorderRadius.circular(12)
         ),
         child: Padding(
@@ -40,11 +40,11 @@ class CustomTextFeild extends StatelessWidget {
                 ));
                 taskcontroller.tasktitle?.clear();
               },
-              decoration: InputDecoration(
-                counterStyle: const TextStyle(color: Colors.grey,fontSize: 10),
+              decoration: const InputDecoration(
+                counterStyle:  TextStyle(color: Colors.grey,fontSize: 10),
                 hintText: "Enter Your Task",
-                hintStyle: TextStyle(color: Colors.grey[700],fontSize: 12),
-                border: const UnderlineInputBorder(borderSide: BorderSide.none),
+                hintStyle: TextStyle(color: Colors.white54,fontSize: 12),
+                border:  UnderlineInputBorder(borderSide: BorderSide.none),
               )
           ),
         ),
