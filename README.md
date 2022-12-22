@@ -2,7 +2,7 @@
 
 Task management Extention.
 
-![Todo extention ui](/ui/task.jpg)
+![Todo extention ui](/ui/ui_task.jpg)
 
 ##
 ### To use the extension

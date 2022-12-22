@@ -64,10 +64,14 @@ class HomeScreen extends StatelessWidget {
                                     child: Text("#",style: TextStyle(color: Color(0xffc6c6c6)),),
                                   ),
                                   /// task title
-                                  Text(taskcontroller.tasks[index].tasktitle.toString(),
-                                    style: TextStyle(
-                                        color: taskcontroller.tasks[index].status! ? const Color(0xfff56369): const Color(0xffc6c6c6),
-                                        decoration: taskcontroller.tasks[index].status!? TextDecoration.lineThrough :TextDecoration.none),)
+                                  SizedBox(
+                                    width: width*0.7,
+                                    child: Text(taskcontroller.tasks[index].tasktitle.toString(),
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                          color: taskcontroller.tasks[index].status! ? const Color(0xfff56369): const Color(0xffc6c6c6),
+                                          decoration: taskcontroller.tasks[index].status!? TextDecoration.lineThrough :TextDecoration.none),),
+                                  )
                                 ],
                                 ),
                                 /// delete icon
